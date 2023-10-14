@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps //optional
 module testbench;
 
     reg clk,rst;

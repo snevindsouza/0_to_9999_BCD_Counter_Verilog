@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 module counter (
-		input clk, rst,
-		output reg [3:0] ctrl, output reg [7:0] segment
+	input clk, rst,
+	output reg [3:0] ctrl, output reg [7:0] segment
 );
 
 integer i, j;       //temporary values 
@@ -13,27 +13,27 @@ reg [3:0] third;    //(hundreds)
 reg [3:0] fourth;   //(thousands)
 
 initial begin
-		i = 0;
-		j = 0;
-		first = 4'b0000;
-		second = 4'b0000;
-		third = 4'b000;
-		fourth = 4'b000;
-		clkdiv = 1'b0;
-		clkdiv2 = 1'b0;
-		flag = 1'b0;
+	i = 0;
+	j = 0;
+	first = 4'b0000;
+	second = 4'b0000;
+	third = 4'b000;
+	fourth = 4'b000;
+	clkdiv = 1'b0;
+	clkdiv2 = 1'b0;
+	flag = 1'b0;
 end
 
 always @(posedge clk) begin  //4MHz clock (Spartan 6 FPGA)
-		i = i+1; j = j+1;
-		if (i == 1000) begin //i == 2000000 for 4MHz clock (depends on the FPGA clock). Keep it low for simulation (1000)
-			clkdiv = ~clkdiv;
-			i = 0;
-		end
-		if (j == 1) begin    //j == 2000 for the multiplexed 7-segment display. Keep it low for simulation(1)
-			clkdiv2 = ~clkdiv2;
-			j = 0;
-		end
+	i = i+1; j = j+1;
+	if (i == 1000) begin //i == 2000000 for 4MHz clock (depends on the FPGA clock). Keep it low for simulation (1000)
+		clkdiv = ~clkdiv;
+		i = 0;
+	end
+	if (j == 1) begin    //j == 2000 for the multiplexed 7-segment display. Keep it low for simulation(1)
+		clkdiv2 = ~clkdiv2;
+		j = 0;
+	end
 end
  
 always @(posedge clkdiv) begin  //1Hz clock (increased frequency)
